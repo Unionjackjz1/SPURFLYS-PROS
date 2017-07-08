@@ -2,7 +2,7 @@
  * ALL DESCRIPTIONS OF FUNCTIONS ARE IN MOTOR.C
  */
 
-#ifndef MOTOT_H_
+#ifndef MOTOR_H_
 #define MOTOR_H_
 
 #include "main.h"

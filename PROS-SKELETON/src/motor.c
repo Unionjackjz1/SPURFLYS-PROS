@@ -42,7 +42,7 @@ int MC29[ 128 ] = {
 /**
  * struct definition for motor setup
  */
-enMotor port[11];
+enMotor port[10];
 
 /**
  * Used for motor setup
@@ -55,8 +55,8 @@ enMotor port[11];
  */
 void
 setupMotor( unsigned char iPort, bool bIsReversed, bool bIsTruespeed ) {
-  port[iPort].bReverse   = bIsReversed;
-  port[iPort].bTruespeed = bIsTruespeed;
+  port[iPort-1].bReverse   = bIsReversed;
+  port[iPort-1].bTruespeed = bIsTruespeed;
 }
 
 /**
@@ -69,9 +69,9 @@ setupMotor( unsigned char iPort, bool bIsReversed, bool bIsTruespeed ) {
  */
 void
 setMotor( unsigned char iPort, int iSpeed ) {
-  iSpeed = port[iPort].bReverse == true ? -iSpeed : iSpeed;
+  iSpeed = port[iPort-1].bReverse == true ? -iSpeed : iSpeed;
 
-  if(port[iPort].bTruespeed == true) {
+  if(port[iPort-1].bTruespeed == true) {
     if(iPort == 1 || iPort == 10) {
       iSpeed = sgn(iSpeed) * L298[abs(clipNum(iSpeed, 127, -127))];
     }
