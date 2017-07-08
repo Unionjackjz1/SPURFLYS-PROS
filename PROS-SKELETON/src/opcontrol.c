@@ -34,7 +34,7 @@ void
 operatorControl( ) {
 	TaskHandle coneTaskHandle = taskRunLoop(coneIntakeControl, 50);
 	TaskHandle mogoTaskHandle = taskRunLoop(mogoIntakeControl, 50);
-	while( 1 ) {
+	while( isEnabled() ) {
 		tank( joystickGetAnalog(1, 3), joystickGetAnalog(1, 2) );
 		armControl( joystickGetDigital(1, 6, JOY_UP), joystickGetDigital(1, 6, JOY_DOWN) );
 
