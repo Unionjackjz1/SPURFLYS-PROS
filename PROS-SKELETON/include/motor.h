@@ -7,16 +7,16 @@
 
 #include "main.h"
 
-#define ARM_L      1
-#define CHASSIS_L1 2
-#define CHASSIS_L2 3
-#define CHASSIS_L3 4
-#define CHASSIS_L4 5
-#define CHASSIS_R4 6
-#define CHASSIS_R3 7
-#define CHASSIS_R2 8
-#define CHASSIS_R1 9
-#define ARM_R      10
+#define ARM_L1     1
+#define ARM_L2     2
+#define ARM_L3     3
+#define CHASSIS_L1 4
+#define CHASSIS_L2 5
+#define CHASSIS_R2 6
+#define CHASSIS_R1 7
+#define ARM_R3     8
+#define ARM_R2     9
+#define ARM_R1     10
 
 // I setup my sensors as a part of my motor code,
 // as sensors are directly linked to motors

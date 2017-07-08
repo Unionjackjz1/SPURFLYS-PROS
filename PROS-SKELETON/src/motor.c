@@ -94,10 +94,6 @@ void
 tank( int iSpeedL, int iSpeedR ) {
   setMotor(CHASSIS_L1, iSpeedL);
   setMotor(CHASSIS_L2, iSpeedL);
-  setMotor(CHASSIS_L3, iSpeedL);
-  setMotor(CHASSIS_L4, iSpeedL);
-  setMotor(CHASSIS_R4, iSpeedR);
-  setMotor(CHASSIS_R3, iSpeedR);
   setMotor(CHASSIS_R2, iSpeedR);
   setMotor(CHASSIS_R1, iSpeedR);
 }
@@ -111,8 +107,12 @@ tank( int iSpeedL, int iSpeedR ) {
  */
 void
 arm( int iSpeed ) {
-  setMotor(ARM_L, iSpeed);
-  setMotor(ARM_R, iSpeed);
+  setMotor(ARM_L1, iSpeed);
+  setMotor(ARM_L2, iSpeed);
+  setMotor(ARM_L3, iSpeed);
+  setMotor(ARM_R3, iSpeed);
+  setMotor(ARM_R2, iSpeed);
+  setMotor(ARM_R1, iSpeed);
 }
 
 
