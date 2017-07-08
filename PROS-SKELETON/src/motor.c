@@ -115,8 +115,15 @@ arm( int iSpeed ) {
   setMotor(ARM_R, iSpeed);
 }
 
-pid sArmPID;
 
+/**
+ * PID for Arm
+ *
+ * @param 	iDes  Target value for PID
+ *
+ * @return	Motor speed to get to desired value
+ */
+pid sArmPID;
 int
 iArmPID( int iDes ) {
 	sArmPID.kP         = 0.2;
