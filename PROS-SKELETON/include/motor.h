@@ -19,7 +19,7 @@
 #define ARM_R1     10
 
 /**
- * Sensor used for arm
+ * Sensor used for motors
  */
 #define ARM_SENSOR 1
 

@@ -1,5 +1,15 @@
 #include "main.h"
 
+/**
+ * Arm Control
+ *
+ * @param  bBtnUp    Boolean for button up
+ * @param  bBtnDown  Boolean for button down
+ *
+ * @return \
+ * if no button is pressed, run a PID loop to stay at last
+ * position. If button is pressed, go up / down respectively.
+ */
 int iArmDes, iOutput;
 void
 armControl( bool bBtnUp, bool bBtnDown ) {
@@ -13,6 +23,12 @@ armControl( bool bBtnUp, bool bBtnDown ) {
 	arm(iOutput);
 }
 
+
+/**
+ * Intake Control
+ *
+ * @return Toggle for each system
+ */
 void
 coneIntakeControl( ) {
 	if(joystickGetDigital(1, 5, JOY_UP)) {
