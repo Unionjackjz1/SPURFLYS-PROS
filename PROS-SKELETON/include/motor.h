@@ -4,6 +4,9 @@
 
 #include "main.h"
 
+/**
+ * Motor names
+ */
 #define ARM_L1     1
 #define ARM_L2     2
 #define ARM_L3     3
@@ -15,8 +18,9 @@
 #define ARM_R2     9
 #define ARM_R1     10
 
-// I setup my sensors as a part of my motor code,
-// as sensors are directly linked to motors
+/**
+ * Sensor used for arm
+ */
 #define ARM_SENSOR 1
 
 /**
