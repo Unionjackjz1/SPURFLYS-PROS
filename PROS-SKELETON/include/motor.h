@@ -2,6 +2,7 @@
 #ifndef MOTOR_H_
 #define MOTOR_H_
 
+// Include function prototypes
 #include "main.h"
 
 /**
