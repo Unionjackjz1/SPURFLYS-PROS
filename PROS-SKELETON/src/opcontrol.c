@@ -1,5 +1,4 @@
 #include "main.h"
-#include "motor.h"
 
 int iArmDes, iOutput;
 void

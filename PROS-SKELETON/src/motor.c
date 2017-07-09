@@ -1,5 +1,5 @@
 // Include function prototypes
-#include "motor.h"
+#include "main.h"
 
 /**
  * Ports 1 and 10 linear rpm remapped values
