@@ -119,6 +119,13 @@ arm( int iSpeed ) {
 /**
  * PID for Arm
  *
+ * HOW TO TUNE:
+ * 1. Set all gains to zero.
+ * 2. Increase the P gain until the response to a disturbance is steady oscillation.
+ * 3. Increase the D gain until the the oscillations go away (i.e. it's critically damped).
+ * 4. Repeat steps 2 and 3 until increasing the D gain does not stop the oscillations.
+ * 5. Set P and D to the last stable values.
+ *
  * @param 	iDes  Target value for PID
  *
  * @return	Motor speed to get to desired value
