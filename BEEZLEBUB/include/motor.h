@@ -1,4 +1,4 @@
-/* header guard */
+/* Header guard */
 #ifndef MOTOR_H_
 #define MOTOR_H_
 
