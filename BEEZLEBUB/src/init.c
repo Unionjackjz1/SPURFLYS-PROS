@@ -15,9 +15,6 @@ initializeIO( ) {
 
 void
 initialize( ) {
-  //analogCalibrate(1);
-  //analogCalibrate(2);
-
   pinMode(10, OUTPUT);
   pinMode(11, OUTPUT);
   pinMode(12, OUTPUT);
