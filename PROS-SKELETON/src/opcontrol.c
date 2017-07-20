@@ -32,17 +32,17 @@ armControl( bool bBtnUp, bool bBtnDown ) {
  */
 void
 coneIntakeControl( ) {
-	if(joystickGetDigital(1, 5, JOY_UP)) {
+	if(joystickGetDigital(MAIN_JOYSTICK, 5, JOY_UP)) {
 		digitalWrite(12, !(digitalRead(12)));
-		while(joystickGetDigital(1, 5, JOY_UP)){}
+		while(joystickGetDigital(MAIN_JOYSTICK, 5, JOY_UP)){}
 	}
 }
 
 void
 mogoIntakeControl( ) {
-	if(joystickGetDigital(1, 5, JOY_DOWN)) {
+	if(joystickGetDigital(MAIN_JOYSTICK, 5, JOY_DOWN)) {
 		digitalWrite(11, !(digitalRead(11)));
-		while(joystickGetDigital(1, 5, JOY_DOWN)){}
+		while(joystickGetDigital(MAIN_JOYSTICK, 5, JOY_DOWN)){}
 	}
 }
 
@@ -51,11 +51,18 @@ operatorControl( ) {
 	TaskHandle coneTaskHandle = taskRunLoop(coneIntakeControl, 50);
 	TaskHandle mogoTaskHandle = taskRunLoop(mogoIntakeControl, 50);
 	while( isEnabled() ) {
-		tank( joystickGetAnalog(1, 3), joystickGetAnalog(1, 2) );
-		armControl( joystickGetDigital(1, 6, JOY_UP), joystickGetDigital(1, 6, JOY_DOWN) );
+		tank( joystickGetAnalog(MAIN_JOYSTICK, 3), joystickGetAnalog(MAIN_JOYSTICK, 2) );
+		armControl( joystickGetDigital(MAIN_JOYSTICK, 6, JOY_UP), joystickGetDigital(MAIN_JOYSTICK, 6, JOY_DOWN) );
 
 		delay(20);
 	}
 	taskDelete(coneTaskHandle);
 	taskDelete(mogoTaskHandle);
 }
+
+/*
+Source Forge
+StackSkillz
+Udemy
+Packt
+*/

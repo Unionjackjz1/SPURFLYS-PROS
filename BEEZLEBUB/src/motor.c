@@ -132,11 +132,11 @@ arm( int iSpeed ) {
 pid sArmPID;
 int
 iArmPID( int iDes ) {
-	sArmPID.kP         = 1.25;
-  sArmPID.kD         = 1;
+  sArmPID.lastError  = sArmPID.error;
+	sArmPID.kP         = 3.25;
+  sArmPID.kD         = 25;
 	sArmPID.current    = encoderGet(ARM_SENSOR);
 	sArmPID.error      = iDes - sArmPID.current;
 	sArmPID.derivative = sArmPID.error - sArmPID.lastError;
-  sArmPID.lastError  = sArmPID.error;
 	return ( (sArmPID.error * sArmPID.kP) + (sArmPID.derivative * sArmPID.kD) );
 }

@@ -133,11 +133,11 @@ arm( int iSpeed ) {
 pid sArmPID;
 int
 iArmPID( int iDes ) {
+  sArmPID.derivative = sArmPID.error - sArmPID.lastError;
 	sArmPID.kP         = 0.2;
   sArmPID.kD         = 0.1;
 	sArmPID.current    = analogReadCalibrated( ARM_SENSOR );
 	sArmPID.error      = iDes - sArmPID.current;
-	sArmPID.derivative = sArmPID.error - sArmPID.lastError;
   sArmPID.lastError  = sArmPID.error;
 	return ( (sArmPID.error * sArmPID.kP) + (sArmPID.derivative * sArmPID.kD) );
 }

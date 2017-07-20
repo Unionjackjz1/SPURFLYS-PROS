@@ -56,7 +56,9 @@ extern "C" {
 // actual code. If a function does not match a prototype, compile errors will occur.
 
 // Prototypes for initialization, operator control and autonomous
-// THE FOLLOWING THREE LINES ARE MODIFICATIONS TO THE ORIGINAL CODE
+// THE FOLLOWING FIVE LINES ARE MODIFICATIONS TO THE ORIGINAL CODE
+#define MAIN_JOYSTICK    1
+#define PARTNER_JOYSTICK 2
 #include "motor.h"
 #define clipNum(iInput, iHigh, iLow) iInput <= iLow ? iLow : (iInput >= iHigh ? iHigh : iInput)
 #define sgn(iInput) iInput == 0 ? 0 : (iInput > 0 ? 1 : -1)
