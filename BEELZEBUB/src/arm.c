@@ -10,17 +10,17 @@
  * if no button is pressed, run a PID loop to stay at last
  * position. If button is pressed, go up / down respectively.
  */
-int iArmDes, iArmOutput;
 void
 armControl( bool bBtnUp, bool bBtnDown ) {
+	static int iDes, iOutput;
 	if(bBtnUp || bBtnDown) {
-		iArmOutput = bBtnUp ? 127 : (bBtnDown ? -127 : 0);
-		iArmDes = getArmSensor();
+		iOutput = bBtnUp ? 127 : (bBtnDown ? -127 : 0);
+		iDes = getArmSensor();
 	}
 	else {
-		iArmOutput = iArmPID(iArmDes);
+		iOutput = iArmPID(iDes);
 	}
-	arm(iArmOutput);
+	arm(iOutput);
 }
 
 /**
@@ -34,14 +34,14 @@ armControl( bool bBtnUp, bool bBtnDown ) {
  * set mogo lift to closed. if bBtnUp/bBtnDown, go
  * up/down respectively
  */
-int iMogoOutput;
 void
 mogoIntakeControl( bool bBtnUp, bool bBtnDown, bool bBrake ) {
+	static int iOutput;
 	if(bBtnUp || bBtnDown) {
-		iMogoOutput = bBtnUp ? 127 : (bBtnDown ? -127 : 0);
+		iOutput = bBtnUp ? 127 : (bBtnDown ? -127 : 0);
 	}
 	else if(bBrake) {
-		iMogoOutput = iMogoPID(0);
+		iOutput = iMogoPID(0);
 	}
-	mogo(iMogoOutput);
+	mogo(iOutput);
 }
