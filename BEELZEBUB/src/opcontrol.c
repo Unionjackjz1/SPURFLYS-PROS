@@ -37,7 +37,7 @@ void
 operatorControl( ) {
 	//Create task handler to allow for multitasking
 	TaskHandle coneTaskHandle = taskRunLoop(coneIntakeControl, 50);
-	while( isEnabled() ) {
+	while(true) {
 		/**
 		 * Chassis Control (tank)
 		 *
