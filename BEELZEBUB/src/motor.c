@@ -181,11 +181,11 @@ iArmPID( int iDes ) {
 pid sMogoPID;
 int
 iMogoPID( int iDes ) {
-  sArmPID.derivative = sArmPID.error - sArmPID.lastError;
-	sArmPID.kP         = 1;
-  sArmPID.kD         = 1;
-	sArmPID.current    = getMogoSensor();
-	sArmPID.error      = iDes - sArmPID.current;
-  sArmPID.lastError  = sArmPID.error;
-	return ( (sArmPID.error * sArmPID.kP) + (sArmPID.derivative * sArmPID.kD) );
+  sMogoPID.derivative = sMogoPID.error - sMogoPID.lastError;
+	sMogoPID.kP         = 1;
+  sMogoPID.kD         = 1;
+	sMogoPID.current    = getMogoSensor();
+	sMogoPID.error      = iDes - sMogoPID.current;
+  sMogoPID.lastError  = sMogoPID.error;
+	return ( (sMogoPID.error * sMogoPID.kP) + (sMogoPID.derivative * sMogoPID.kD) );
 }
