@@ -47,6 +47,7 @@ operatorControl( ) {
 		 * @return iSpeedL and iSpeedR to their respective sides of the chassis
 		 */
 		tank(joystickGetAnalog(MAIN_JOYSTICK, 3), joystickGetAnalog(MAIN_JOYSTICK, 2));
+
 		/**
 		 * Arm Control
 		 *
@@ -58,6 +59,7 @@ operatorControl( ) {
 		 * position. If button is pressed, go up / down respectively.
 		 */
 		armControl(joystickGetDigital(MAIN_JOYSTICK, 6, JOY_UP), joystickGetDigital(MAIN_JOYSTICK, 6, JOY_DOWN));
+
 		/**
 		 * Mobile Goal Intake Control
 		 *
@@ -69,7 +71,7 @@ operatorControl( ) {
 		 * set mogo lift to closed. if bBtnUp/bBtnDown, go
 		 * up/down respectively
 		 */
-		mogoIntakeControl(joystickGetDigital(MAIN_JOYSTICK, 7, JOY_UP), joystickGetDigital(MAIN_JOYSTICK, 5, JOY_DOWN), joystickGetDigital(MAIN_JOYSTICK, 7, JOY_DOWN));
+		mogoIntakeControl(joystickGetDigital(MAIN_JOYSTICK, 7, JOY_LEFT), joystickGetDigital(MAIN_JOYSTICK, 5, JOY_DOWN), joystickGetDigital(MAIN_JOYSTICK, 7, JOY_DOWN));
 
 		delay(20); //Don't hog the CPU!
 	}

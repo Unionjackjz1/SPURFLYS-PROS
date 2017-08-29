@@ -48,8 +48,35 @@ int getArmSensor( ) {
   return (analogReadCalibrated(1)+(-analogReadCalibrated(2)))/2;
 }
 
+/**
+ * Sensor value for mogo lift
+ *
+ * @return	Current sensor value
+ */
 int getMogoSensor( ) {
   return (analogReadCalibrated(3));
+}
+
+/**
+ * Sensor value for right chassis
+ *
+ * @return	Current sensor value
+ */
+int getRightChassisSensor( ) {
+  int counts;
+  imeGet(RIGHT_CHASSIS_IME, &counts);
+  return -counts;
+}
+
+/**
+ * Sensor value for left chassis
+ *
+ * @return	Current sensor value
+ */
+int getLeftChassisSensor( ){
+  int counts;
+  imeGet(LEFT_CHASSIS_IME, &counts);
+  return counts;
 }
 
 /**
@@ -86,10 +113,10 @@ setMotor( unsigned char iPort, int iSpeed ) {
 
   if(port[iPort-1].bTruespeed == true) {
     if(iPort == 1 || iPort == 10) {
-      iSpeed = sgn(iSpeed) * L298[abs(clipNum(iSpeed, 127, -127))];
+      iSpeed = sgn(iSpeed) * L298[abs(clipNum(iSpeed, 127))];
     }
     else {
-      iSpeed = sgn(iSpeed) * MC29[abs(clipNum(iSpeed, 127, -127))];
+      iSpeed = sgn(iSpeed) * MC29[abs(clipNum(iSpeed, 127))];
     }
   }
   motorSet( iPort , iSpeed );
@@ -139,14 +166,16 @@ arm( int iSpeed ) {
 
 
 /**
- * PID for Arm
- *
- * HOW TO TUNE:
+ * HOW TO TUNE PID:
  * 1. Set all gains to zero.
  * 2. Increase the P gain until the response to a disturbance is steady oscillation.
  * 3. Increase the D gain until the the oscillations go away (i.e. it's critically damped).
  * 4. Repeat steps 2 and 3 until increasing the D gain does not stop the oscillations.
  * 5. Set P and D to the last stable values.
+ */
+
+/**
+ * PID for Arm
  *
  * @param 	iDes  Target value for PID
  *
@@ -165,14 +194,19 @@ iArmPID( int iDes ) {
 }
 
 /**
- * PID for Mogo
+ * Checks if arm is at desired value
  *
- * HOW TO TUNE:
- * 1. Set all gains to zero.
- * 2. Increase the P gain until the response to a disturbance is steady oscillation.
- * 3. Increase the D gain until the the oscillations go away (i.e. it's critically damped).
- * 4. Repeat steps 2 and 3 until increasing the D gain does not stop the oscillations.
- * 5. Set P and D to the last stable values.
+ * @param 	iDes  Desired value to check
+ *
+ * @return	True if arm is at position, else false
+ */
+bool
+armIsAtPos( int iDes ) {
+  return abs(sArmPID.error) < 20 ? true : false;
+}
+
+/**
+ * PID for Mogo
  *
  * @param 	iDes  Target value for PID
  *
@@ -188,4 +222,78 @@ iMogoPID( int iDes ) {
 	sMogoPID.error      = iDes - sMogoPID.current;
   sMogoPID.lastError  = sMogoPID.error;
 	return ( (sMogoPID.error * sMogoPID.kP) + (sMogoPID.derivative * sMogoPID.kD) );
+}
+
+/**
+ * Checks if mogo is at desired value
+ *
+ * @param 	iDes  Desired value to check
+ *
+ * @return	True if mogo is at position, else false
+ */
+bool
+mogoIsAtPos( int iDes ) {
+  return abs(sMogoPID.error) < 20 ? true : false;
+}
+
+/**
+ * PID for Right Chassis
+ *
+ * @param 	iDes  Target value for PID
+ *
+ * @return	Motor speed to get to desired value
+ */
+pid sRCPID;
+int
+iRightChassisPID( int iDes ) {
+  sRCPID.derivative = sRCPID.error - sRCPID.lastError;
+	sRCPID.kP         = 1;
+  sRCPID.kD         = 1;
+	sRCPID.current    = getRightChassisSensor();
+	sRCPID.error      = iDes - sRCPID.current;
+  sRCPID.lastError  = sRCPID.error;
+	return ( (sRCPID.error * sRCPID.kP) + (sRCPID.derivative * sRCPID.kD) );
+}
+
+/**
+ * Checks if righ chassis tis at desired value
+ *
+ * @param 	iDes  Desired value to check
+ *
+ * @return	True if right chassis is at position, else false
+ */
+bool
+rCIsAtPos( int iDes ) {
+  return abs(sRCPID.error) < 10 ? true : false;
+}
+
+/**
+ * PID for Left Chassis
+ *
+ * @param 	iDes  Target value for PID
+ *
+ * @return	Motor speed to get to desired value
+ */
+pid sLCPID;
+int
+iLeftChassisPID( int iDes ) {
+  sLCPID.derivative = sLCPID.error - sLCPID.lastError;
+	sLCPID.kP         = 1;
+  sLCPID.kD         = 1;
+	sLCPID.current    = getLeftChassisSensor();
+	sLCPID.error      = iDes - sLCPID.current;
+  sLCPID.lastError  = sLCPID.error;
+	return ( (sLCPID.error * sLCPID.kP) + (sLCPID.derivative * sLCPID.kD) );
+}
+
+/**
+ * Checks if left chassis is at desired value
+ *
+ * @param 	iDes  Desired value to check
+ *
+ * @return	True if left chassis is at position, else false
+ */
+bool
+lCIsAtPos( int iDes ) {
+  return abs(sLCPID.error) < 10 ? true : false;
 }

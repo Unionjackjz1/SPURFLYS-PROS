@@ -37,11 +37,21 @@ armControl( bool bBtnUp, bool bBtnDown ) {
 void
 mogoIntakeControl( bool bBtnUp, bool bBtnDown, bool bBrake ) {
 	static int iOutput;
-	if(bBtnUp || bBtnDown) {
-		iOutput = bBtnUp ? 127 : (bBtnDown ? -127 : 0);
+	static bool bIsBraking;
+	if(bBrake) {
+		bIsBraking = true;
 	}
-	else if(bBrake) {
+	
+	if(bBtnUp || bBtnDown) {
+		bIsBraking = false;
+		iOutput = bBtnUp ? 127 : -127;
+	}
+	else if(bIsBraking) {
 		iOutput = iMogoPID(0);
 	}
+	else {
+		iOutput = 0;
+	}
+
 	mogo(iOutput);
 }

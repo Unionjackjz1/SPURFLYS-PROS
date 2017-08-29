@@ -11,13 +11,13 @@
  */
 void
 initializeIO( ) {
-  setupMotor(ARM_R1,    false, false);
-  setupMotor(ARM_R2,    false, false);
-  setupMotor(ARM_L1,    true,  false);
-  setupMotor(ARM_L2,    true,  false);
-  setupMotor(CHASSIS_L, true,  false);
-  setupMotor(MOGO_R,    true,  false);
-  setupMotor(MOGO_L,    false, true);
+  setupMotor(ARM_R1,    true,  false);
+  setupMotor(ARM_R2,    true,  false);
+  setupMotor(ARM_L1,    false, false);
+  setupMotor(ARM_L2,    false, false);
+  setupMotor(MOGO_L,    true,  false);
+  setupMotor(CHASSIS_L, false, true);
+  setupMotor(MOGO_R,    false, false);
   setupMotor(CHASSIS_R, true,  true);
 }
 
@@ -41,4 +41,9 @@ initialize( ) {
   analogCalibrate(1);
   analogCalibrate(2);
   analogCalibrate(3);
+
+  int IMECount = imeInitializeAll();
+  if(IMECount != NUMBER_OF_IME) {
+    //Print to LCD that an IME is bad
+  }
 }

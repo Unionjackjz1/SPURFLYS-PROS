@@ -5,43 +5,61 @@
 // Include function prototypes
 #include "main.h"
 
-//#define MOGO_L     1
-//#define CHASSIS_L1 2
-//#define CHASSIS_L2 3
-//#define ARM_L1     4
-//#define ARM_L2     5
-//#define ARM_R2     6
-//#define ARM_R1     7
-//#define CHASSIS_R2 8
-//#define CHASSIS_R1 9
-//#define MOGO_R     10
+//#define ARM_L1    2 /* FALSE */
+//#define ARM_L2    3 /* FALSE */
+//#define MOGO_L    4 /* FALSE */
+//#define CHASSIS_L 5 /* FALSE */
+//#define MOGO_R    6 /* TRUE */
+//#define CHASSIS_R 7 /* TRUE */
+//#define ARM_R1    8 /* FALSE */
+//#define ARM_R2    9 /* TRUE */
 
 /**
  * Motor names
  */
-#define ARM_R1     2 /* NOT REVERSED */
-#define ARM_R2     3 /* NOT REVERSED */
-#define ARM_L1     4 /* REVERSED */
-#define ARM_L2     5 /* NOT REVERSED */
-#define CHASSIS_L  6 /* NOT REVERSED */
-#define MOGO_R     7 /* REVERSED */
-#define MOGO_L     8 /* NOT REVERSED */
-#define CHASSIS_R  9 /* REVERSED */
-
+ #define ARM_L1    2 /* FALSE */
+ #define ARM_L2    3 /* FALSE */
+ #define MOGO_L    4 /* FALSE */
+ #define CHASSIS_L 5 /* FALSE */
+ #define MOGO_R    6 /* TRUE */
+ #define CHASSIS_R 7 /* TRUE */
+ #define ARM_R1    8 /* FALSE */
+ #define ARM_R2    9 /* TRUE */
 
 /**
  * Sensor value for arm
  *
- * @return	Currenst sensor value
+ * @return	Current sensor value
  */
 int getArmSensor();
 
 /**
  * Sensor value for mogo lift
  *
- * @return	Currenst sensor value
+ * @return	Current sensor value
  */
 int getMogoSensor();
+
+/**
+ * Sensor value for right chassis
+ *
+ * @return	Current sensor value
+ */
+int getRightChassisSensor();
+
+/**
+ * Sensor value for left chassis
+ *
+ * @return	Current sensor value
+ */
+int getLeftChassisSensor();
+
+/**
+ * Defines for chassis IME's
+ */
+ #define RIGHT_CHASSIS_IME 0
+ #define LEFT_CHASSIS_IME  1
+ #define NUMBER_OF_IME     2
 
 /**
  * Struct for motor seutp
@@ -134,6 +152,15 @@ void arm(int iSpeed);
 int iArmPID(int iDes);
 
 /**
+ * Checks if arm is at desired value
+ *
+ * @param 	iDes  Desired value to check
+ *
+ * @return	True if arm is at position, else false
+ */
+bool armIsAtPos(int iDes);
+
+/**
  * PID for Mogo
  *
  * @param 	iDes  Target value for PID
@@ -141,6 +168,51 @@ int iArmPID(int iDes);
  * @return	Motor speed to get to desired value
  */
 int iMogoPID(int iDes);
+
+/**
+ * Checks if mogo is at desired value
+ *
+ * @param 	iDes  Desired value to check
+ *
+ * @return	True if mogo is at position, else false
+ */
+bool mogoIsAtPos(int iDes);
+
+/**
+ * PID for right chassis
+ *
+ * @param 	iDes  Target value for PID
+ *
+ * @return	Motor speed to get to desired value
+ */
+int iRightChassisPID(int iDes);
+
+/**
+ * Checks if right chassis is at desired value
+ *
+ * @param 	iDes  Desired value to check
+ *
+ * @return	True if right chassis is at position, else false
+ */
+bool rCIsAtPos(int iDes);
+
+/**
+ * PID for left chassis
+ *
+ * @param 	iDes  Target value for PID
+ *
+ * @return	Motor speed to get to desired value
+ */
+int iLeftChassisPID(int iDes);
+
+/**
+ * Checks if left chassis is at desired value
+ *
+ * @param 	iDes  Desired value to check
+ *
+ * @return	True if left chassis is at position, else false
+ */
+bool lCIsAtPos(int iDes);
 
 /* end of header guard */
 #endif

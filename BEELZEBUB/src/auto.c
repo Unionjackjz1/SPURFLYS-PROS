@@ -1,6 +1,19 @@
 // Include function prototypes
 #include "main.h"
 
+void
+auton(int iLeftChassisDesSpeed,  int iLeftChassisDesPos,
+  int iRightChassisDesSpeed, int iRightChassisDesPos,
+  int iArmDesSpeed,          int iArmDesPos,
+  int iMogoDesSpeed,         int iMogoDesPos) {
+
+  while(lCIsAtPos(iLeftChassisDesPos) && rCIsAtPos(iLeftChassisDesPos) && armIsAtPos(iArmDesPos) && mogoIsAtPos(iMogoDesPos)) {
+    tank(clipNum(iLeftChassisPID(iLeftChassisDesPos), iLeftChassisDesSpeed), clipNum(iRightChassisPID(iRightChassisDesPos), iRightChassisDesSpeed));
+    arm(clipNum(iArmPID(iArmDesPos), iArmDesSpeed));
+    mogo(clipNum(iMogoPID(iMogoDesPos), iMogoDesSpeed));
+  }
+}
+
 /**
  * Runs the user autonomous code. This function will be started in its own task with the default
  * priority and stack size whenever the robot is enabled via the Field Management System or the
@@ -17,5 +30,6 @@
  */
 void
 autonomous( ) {
-
+  imeReset(LEFT_CHASSIS_IME);
+  imeReset(RIGHT_CHASSIS_IME);
 }
