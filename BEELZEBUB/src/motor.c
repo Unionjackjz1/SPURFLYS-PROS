@@ -164,7 +164,6 @@ arm( int iSpeed ) {
   setMotor(ARM_R1, iSpeed);
 }
 
-
 /**
  * HOW TO TUNE PID:
  * 1. Set all gains to zero.
@@ -185,8 +184,8 @@ pid sArmPID;
 int
 iArmPID( int iDes ) {
   sArmPID.derivative = sArmPID.error - sArmPID.lastError;
-	sArmPID.kP         = 0.225;
-  sArmPID.kD         = 10;
+	sArmPID.kP         = 0.4;
+  sArmPID.kD         = 8;
 	sArmPID.current    = getArmSensor();
 	sArmPID.error      = iDes - sArmPID.current;
   sArmPID.lastError  = sArmPID.error;
@@ -202,7 +201,7 @@ iArmPID( int iDes ) {
  */
 bool
 armIsAtPos( int iDes ) {
-  return abs(sArmPID.error) < 20 ? true : false;
+  return abs(iDes - getArmSensor()) < 20 ? true : false;
 }
 
 /**
@@ -216,8 +215,8 @@ pid sMogoPID;
 int
 iMogoPID( int iDes ) {
   sMogoPID.derivative = sMogoPID.error - sMogoPID.lastError;
-	sMogoPID.kP         = 1;
-  sMogoPID.kD         = 1;
+	sMogoPID.kP         = .25;
+  sMogoPID.kD         = 5;
 	sMogoPID.current    = getMogoSensor();
 	sMogoPID.error      = iDes - sMogoPID.current;
   sMogoPID.lastError  = sMogoPID.error;
@@ -233,7 +232,7 @@ iMogoPID( int iDes ) {
  */
 bool
 mogoIsAtPos( int iDes ) {
-  return abs(sMogoPID.error) < 20 ? true : false;
+  return abs(iDes - getMogoSensor()) < 40 ? true : false;
 }
 
 /**
@@ -247,7 +246,7 @@ pid sRCPID;
 int
 iRightChassisPID( int iDes ) {
   sRCPID.derivative = sRCPID.error - sRCPID.lastError;
-	sRCPID.kP         = 1;
+	sRCPID.kP         = 2;
   sRCPID.kD         = 1;
 	sRCPID.current    = getRightChassisSensor();
 	sRCPID.error      = iDes - sRCPID.current;
@@ -264,7 +263,7 @@ iRightChassisPID( int iDes ) {
  */
 bool
 rCIsAtPos( int iDes ) {
-  return abs(sRCPID.error) < 10 ? true : false;
+  return abs(iDes - getRightChassisSensor()) < 10 ? true : false;
 }
 
 /**
@@ -278,7 +277,7 @@ pid sLCPID;
 int
 iLeftChassisPID( int iDes ) {
   sLCPID.derivative = sLCPID.error - sLCPID.lastError;
-	sLCPID.kP         = 1;
+	sLCPID.kP         = 2;
   sLCPID.kD         = 1;
 	sLCPID.current    = getLeftChassisSensor();
 	sLCPID.error      = iDes - sLCPID.current;
@@ -295,5 +294,5 @@ iLeftChassisPID( int iDes ) {
  */
 bool
 lCIsAtPos( int iDes ) {
-  return abs(sLCPID.error) < 10 ? true : false;
+  return abs(iDes - getLeftChassisSensor()) < 10 ? true : false;
 }

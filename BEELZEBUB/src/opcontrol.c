@@ -35,6 +35,8 @@ coneIntakeControl( ) {
  */
 void
 operatorControl( ) {
+	//statGoalAuton();
+	//delay(1000);
 	//Create task handler to allow for multitasking
 	TaskHandle coneTaskHandle = taskRunLoop(coneIntakeControl, 50);
 	while(true) {
@@ -71,7 +73,9 @@ operatorControl( ) {
 		 * set mogo lift to closed. if bBtnUp/bBtnDown, go
 		 * up/down respectively
 		 */
-		mogoIntakeControl(joystickGetDigital(MAIN_JOYSTICK, 7, JOY_LEFT), joystickGetDigital(MAIN_JOYSTICK, 5, JOY_DOWN), joystickGetDigital(MAIN_JOYSTICK, 7, JOY_DOWN));
+		mogoIntakeControl(joystickGetDigital(MAIN_JOYSTICK, 5, JOY_DOWN), joystickGetDigital(MAIN_JOYSTICK, 7, JOY_DOWN),  joystickGetDigital(MAIN_JOYSTICK, 8, JOY_DOWN),  joystickGetDigital(MAIN_JOYSTICK, 7, JOY_LEFT));
+
+		printf("\n%d, %d, %d, %d", getLeftChassisSensor(), getRightChassisSensor(), getArmSensor(), getMogoSensor());
 
 		delay(20); //Don't hog the CPU!
 	}

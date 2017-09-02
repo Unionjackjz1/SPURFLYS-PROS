@@ -22,4 +22,4 @@ void armControl(bool bBtnUp, bool bBtnDown);
  * if no button is pressed, set 0 motor power. else,
  * go up/down respectively
  */
-void mogoIntakeControl(bool bBtnUp, bool bBtnDown, bool bBrake);
+void mogoIntakeControl(bool bBtnUp, bool bBtnDown, bool bSlow, bool bBrake);

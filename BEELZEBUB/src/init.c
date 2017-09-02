@@ -42,8 +42,14 @@ initialize( ) {
   analogCalibrate(2);
   analogCalibrate(3);
 
+  lcdInit(uart2);
+  lcdClear(uart2);
+  lcdSetBacklight(uart2, true);
+
   int IMECount = imeInitializeAll();
   if(IMECount != NUMBER_OF_IME) {
-    //Print to LCD that an IME is bad
+    lcdPrint(uart2, 1, "IME IZ DED");
   }
+
+  autonSelector();
 }

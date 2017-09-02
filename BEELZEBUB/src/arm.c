@@ -13,12 +13,13 @@
 void
 armControl( bool bBtnUp, bool bBtnDown ) {
 	static int iDes, iOutput;
+	static float kP = 0.1;
 	if(bBtnUp || bBtnDown) {
 		iOutput = bBtnUp ? 127 : (bBtnDown ? -127 : 0);
 		iDes = getArmSensor();
 	}
 	else {
-		iOutput = iArmPID(iDes);
+		iOutput = (iDes - getArmSensor()) * kP;
 	}
 	arm(iOutput);
 }
@@ -35,16 +36,20 @@ armControl( bool bBtnUp, bool bBtnDown ) {
  * up/down respectively
  */
 void
-mogoIntakeControl( bool bBtnUp, bool bBtnDown, bool bBrake ) {
+mogoIntakeControl( bool bBtnUp, bool bBtnDown, bool bSlow, bool bBrake ) {
 	static int iOutput;
 	static bool bIsBraking;
 	if(bBrake) {
 		bIsBraking = true;
 	}
-	
+
 	if(bBtnUp || bBtnDown) {
 		bIsBraking = false;
-		iOutput = bBtnUp ? 127 : -127;
+		if(bSlow) {
+			iOutput = bBtnUp ? -80 : 80;
+		}else{
+			iOutput = bBtnUp ? -127 : 127;
+		}
 	}
 	else if(bIsBraking) {
 		iOutput = iMogoPID(0);
@@ -52,6 +57,5 @@ mogoIntakeControl( bool bBtnUp, bool bBtnDown, bool bBrake ) {
 	else {
 		iOutput = 0;
 	}
-
 	mogo(iOutput);
 }

@@ -61,6 +61,8 @@ extern "C" {
 #define PARTNER_JOYSTICK 2
 #include "motor.h"
 #include "arm.h"
+#include "auto.h"
+#include "lcd.h"
 #define clipNum(iInput, iLimit) iInput <= -iLimit ? -iLimit : (iInput >= iLimit ? iLimit : iInput)
 #define sgn(iInput) iInput == 0 ? 0 : (iInput > 0 ? 1 : -1)
 
