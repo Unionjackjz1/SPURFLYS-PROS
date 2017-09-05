@@ -15,7 +15,12 @@ armControl( bool bBtnUp, bool bBtnDown ) {
 	static int iDes, iOutput;
 	static float kP = 0.1;
 	if(bBtnUp || bBtnDown) {
-		iOutput = bBtnUp ? 127 : (bBtnDown ? -127 : 0);
+		if(bBtnUp && bBtnDown) {
+			arm(200-getArmSensor() * kP);
+		}
+		else {
+			iOutput = bBtnUp ? 127 : (bBtnDown ? -127 : 0);
+		}
 		iDes = getArmSensor();
 	}
 	else {
@@ -46,7 +51,7 @@ mogoIntakeControl( bool bBtnUp, bool bBtnDown, bool bSlow, bool bBrake ) {
 	if(bBtnUp || bBtnDown) {
 		bIsBraking = false;
 		if(bSlow) {
-			iOutput = bBtnUp ? -80 : 80;
+			iOutput = bBtnUp ? -60 : 60;
 		}else{
 			iOutput = bBtnUp ? -127 : 127;
 		}

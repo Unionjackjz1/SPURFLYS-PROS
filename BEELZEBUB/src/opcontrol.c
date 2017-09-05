@@ -75,8 +75,6 @@ operatorControl( ) {
 		 */
 		mogoIntakeControl(joystickGetDigital(MAIN_JOYSTICK, 5, JOY_DOWN), joystickGetDigital(MAIN_JOYSTICK, 7, JOY_DOWN),  joystickGetDigital(MAIN_JOYSTICK, 8, JOY_DOWN),  joystickGetDigital(MAIN_JOYSTICK, 7, JOY_LEFT));
 
-		printf("\n%d, %d, %d, %d", getLeftChassisSensor(), getRightChassisSensor(), getArmSensor(), getMogoSensor());
-
 		delay(20); //Don't hog the CPU!
 	}
 	//Delete the multitasking handler once it is not being used

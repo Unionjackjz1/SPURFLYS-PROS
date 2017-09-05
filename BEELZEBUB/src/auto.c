@@ -16,7 +16,7 @@ auton(int iLeftChassisDesSpeed,  int iLeftChassisDesPos,
 }
 
 void
-statGoalAuton( ) {
+statGoal( ) {
   imeReset(LEFT_CHASSIS_IME);
   imeReset(RIGHT_CHASSIS_IME);
 
@@ -26,6 +26,34 @@ statGoalAuton( ) {
   auton(100, 650, 100, 650, 127, 1000, 127, 0, false);
   delay(250);
   auton(100, 400, 100, 400, 127, 1000, 127, 0, false);
+}
+
+void
+rPush( ) {
+  imeReset(LEFT_CHASSIS_IME);
+  imeReset(RIGHT_CHASSIS_IME);
+
+}
+
+void
+lPush( ) {
+  imeReset(LEFT_CHASSIS_IME);
+  imeReset(RIGHT_CHASSIS_IME);
+
+}
+
+void
+rPushScore( ) {
+  imeReset(LEFT_CHASSIS_IME);
+  imeReset(RIGHT_CHASSIS_IME);
+
+}
+
+void
+lPushScore( ) {
+  imeReset(LEFT_CHASSIS_IME);
+  imeReset(RIGHT_CHASSIS_IME);
+
 }
 
 /**
@@ -45,4 +73,15 @@ statGoalAuton( ) {
  */
 void
 autonomous( ) {
+  lcdClear(uart2);
+  lcdSetText(uart2, 1, "Running");
+  lcdSetText(uart2, 2, rgC[iAuton-1]);
+
+  switch(iAuton) {
+    case 1: statGoal();   break;
+    case 2: rPush();      break;
+    case 3: lPush();      break;
+    case 4: rPushScore(); break;
+    case 5: lPushScore(); break;
+  }
 }

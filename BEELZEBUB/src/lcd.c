@@ -10,11 +10,7 @@ waitForRelease(){
 
 void
 autonSelector( ) {
-  const int kMaxPage = 5;
-  const int kMinPage = 1;
-  static int iAuton = kMinPage;
   bool bLcd = true;
-  char rgC[5][16] = {"Stat Goal", "R Push", "L Push", "R Push Score", "L Push Score"};
 
   while(bLcd) {
     if(lcdReadButtons(uart2) == 1) {
