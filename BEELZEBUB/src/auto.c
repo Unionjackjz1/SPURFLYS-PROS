@@ -75,7 +75,7 @@ void
 autonomous( ) {
   lcdClear(uart2);
   lcdSetText(uart2, 1, "Running");
-  lcdSetText(uart2, 2, rgC[iAuton-1]);
+  lcdPrint(uart2, 2, "%d", iAuton);
 
   switch(iAuton) {
     case 1: statGoal();   break;

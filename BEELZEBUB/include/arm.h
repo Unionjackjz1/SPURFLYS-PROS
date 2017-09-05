@@ -10,7 +10,7 @@
  * if no button is pressed, run a PID loop to stay at last
  * position. If button is pressed, go up / down respectively.
  */
-void armControl(bool bBtnUp, bool bBtnDown);
+void armControl(bool bBtnUp, bool bBtnDown, bool bPreset);
 
 /**
  * Mobile Goal Intake Control

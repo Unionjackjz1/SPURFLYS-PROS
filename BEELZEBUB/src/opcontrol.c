@@ -39,6 +39,7 @@ operatorControl( ) {
 	//delay(1000);
 	//Create task handler to allow for multitasking
 	TaskHandle coneTaskHandle = taskRunLoop(coneIntakeControl, 50);
+	TaskHandle autonTaskHandle = taskRunLoop(autonSelector, 50);
 	while(true) {
 		/**
 		 * Chassis Control (tank)
@@ -60,7 +61,7 @@ operatorControl( ) {
 		 * if no button is pressed, run a PID loop to stay at last
 		 * position. If button is pressed, go up / down respectively.
 		 */
-		armControl(joystickGetDigital(MAIN_JOYSTICK, 6, JOY_UP), joystickGetDigital(MAIN_JOYSTICK, 6, JOY_DOWN));
+		armControl(joystickGetDigital(MAIN_JOYSTICK, 6, JOY_UP), joystickGetDigital(MAIN_JOYSTICK, 6, JOY_DOWN), joystickGetDigital(MAIN_JOYSTICK, 8, JOY_RIGHT));
 
 		/**
 		 * Mobile Goal Intake Control
@@ -79,4 +80,5 @@ operatorControl( ) {
 	}
 	//Delete the multitasking handler once it is not being used
 	taskDelete(coneTaskHandle);
+	taskDelete(autonTaskHandle);
 }

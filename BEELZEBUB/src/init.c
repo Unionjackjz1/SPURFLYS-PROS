@@ -50,6 +50,4 @@ initialize( ) {
   if(IMECount != NUMBER_OF_IME) {
     lcdPrint(uart2, 1, "IME IZ DED");
   }
-
-  autonSelector();
 }

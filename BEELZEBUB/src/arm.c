@@ -11,17 +11,15 @@
  * position. If button is pressed, go up / down respectively.
  */
 void
-armControl( bool bBtnUp, bool bBtnDown ) {
+armControl( bool bBtnUp, bool bBtnDown, bool bPreset ) {
 	static int iDes, iOutput;
 	static float kP = 0.1;
 	if(bBtnUp || bBtnDown) {
-		if(bBtnUp && bBtnDown) {
-			arm(200-getArmSensor() * kP);
-		}
-		else {
-			iOutput = bBtnUp ? 127 : (bBtnDown ? -127 : 0);
-		}
+		iOutput = bBtnUp ? 127 : (bBtnDown ? -127 : 0);
 		iDes = getArmSensor();
+	}
+	else if (bPreset) {
+		iDes = 500;
 	}
 	else {
 		iOutput = (iDes - getArmSensor()) * kP;
